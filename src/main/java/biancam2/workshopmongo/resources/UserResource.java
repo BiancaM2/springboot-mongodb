@@ -1,5 +1,6 @@
 package biancam2.workshopmongo.resources;
 
+import biancam2.workshopmongo.domain.Post;
 import biancam2.workshopmongo.domain.User;
 import biancam2.workshopmongo.dto.UserDTO;
 import biancam2.workshopmongo.services.UserService;
@@ -52,6 +53,12 @@ public class UserResource {
         obj.setId(id);
         obj = service.update(obj);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping (value = "/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id){
+        User obj = service.findById(id);
+        return ResponseEntity.ok().body(obj.getPosts());
     }
 
 
